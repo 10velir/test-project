@@ -20,8 +20,8 @@ public final class EntityGeneratorUtils {
     private static Faker faker = new Faker();
     private static Random random = new Random();
 
-
     private EntityGeneratorUtils() {
+
     }
 
     public static User createUser() {
@@ -62,7 +62,7 @@ public final class EntityGeneratorUtils {
     }
 
     public static ZonedDateTime createZoneDateTime() {
-        String format = String.format("%04d-%02d-%02dT%02d:%02d:%02d+03:00", 2019 - random.nextInt(50) + 10,
+        String format = String.format("%04d-%02d-%02dT%02d:%02d:%02d+03:00", 2019 - (random.nextInt(50) + 10),
                 random.nextInt(11) + 1,
                 random.nextInt(27) + 1,
                 random.nextInt(24),
@@ -76,7 +76,8 @@ public final class EntityGeneratorUtils {
         for (int i = 0; i < 10; i++) {
             System.out.println(createUser());
         }
-    }
+
+     }
 
     public static String createUri() {
         return createUri(10);
