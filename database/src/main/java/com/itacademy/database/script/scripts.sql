@@ -24,11 +24,11 @@ CREATE TABLE user_ (
                        name VARCHAR(64) NOT NULL,
                        login VARCHAR(64) NOT NULL UNIQUE,
                        password VARCHAR(64) NOT NULL,
-                       birth_date date NOT NULL,
+                       birth_date date,
                        email VARCHAR(64),
                        phone_number VARCHAR(64),
-                       status CHAR(10) DEFAULT 'ACTIVE' NOT NULL,
-                       role CHAR(8) DEFAULT 'USER' NOT NULL ,
+                       status CHAR(10) DEFAULT 'ACTIVE',
+                       role CHAR(8) DEFAULT 'USER',
                        address_id INT REFERENCES address (id)
 );
 
@@ -37,8 +37,8 @@ CREATE TABLE client_order (
                               id BIGSERIAL PRIMARY KEY,
                               lease_period TIME NOT NULL,
                               passport_details VARCHAR(45) NOT NULL ,
-                              status BOOLEAN DEFAULT FALSE,
-                              reasons VARCHAR(45) NOT NULL,
+                              admin_approval BOOLEAN DEFAULT FALSE,
+                              notes VARCHAR(45) NOT NULL,
                               car_id INT,
                               client_id INT,
                               FOREIGN KEY (car_id) REFERENCES car(id) ON DELETE CASCADE,

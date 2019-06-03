@@ -12,11 +12,11 @@
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
 
-        <mapping class="com.it_academy.by.database.entities.Car"/>
-        <mapping class="com.it_academy.by.database.entities.User"/>
-        <mapping class="com.it_academy.by.database.entities.Passport"/>
-        <mapping class="com.it_academy.by.database.entities.Address"/>
-        <mapping class="com.it_academy.by.database.entities.ClientOrder"/>
+        <mapping class="com.itacademy.database.entities.Car"/>
+        <mapping class="com.itacademy.database.entities.User"/>
+        <mapping class="com.itacademy.database.entities.Passport"/>
+        <mapping class="com.itacademy.database.entities.Address"/>
+        <mapping class="com.itacademy.database.entities.ClientOrder"/>
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
