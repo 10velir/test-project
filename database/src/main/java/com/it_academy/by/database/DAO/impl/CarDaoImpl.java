@@ -1,6 +1,5 @@
 package com.it_academy.by.database.DAO.impl;
 import com.it_academy.by.database.DAO.CarDao;
-import com.it_academy.by.database.entities.Car;
 
 import java.io.Serializable;
 import java.sql.PreparedStatement;

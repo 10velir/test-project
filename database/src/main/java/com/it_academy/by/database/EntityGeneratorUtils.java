@@ -2,10 +2,6 @@ package com.it_academy.by.database;
 
 import com.github.javafaker.Address;
 import com.github.javafaker.Faker;
-import com.it_academy.by.database.entities.Passport;
-import com.it_academy.by.database.entities.Role;
-import com.it_academy.by.database.entities.User;
-import com.it_academy.by.database.entities.UserStatus;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
