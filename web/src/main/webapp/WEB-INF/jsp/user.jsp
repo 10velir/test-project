@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: cr_zy
@@ -20,34 +21,50 @@
     }</style>
     </head>
 <body>
-        <p>
-            Hey! You won the car: ${requestScope.car.getId()}
+        <p align="center">
+            Hey <%--${requestScope.users.getName()} ! ur id is ${requestScope.users.getId()}--%>
         </p>
 
-        <form id="searchForm">
-            <div class="form-row">
-                <div class="form-row">
-
-                    <div class="form-group col-md-7">
-                        <label for="inputModel">Email</label>
-                        <input type="email" class="form-control" id="inputModel" placeholder="Model">
-                    </div>
-
-                    <div class="form-group col-md-7">
-                        <label for="inputSupplier">Email</label>
-                        <input type="email" class="form-control" id="inputSupplier" placeholder="Supplier">
-                    </div>
-
-                    <div class="form-group col-md-7">
-                        <label for="inputColor">Email</label>
-                        <input type="email" class="form-control" id="inputColor" placeholder="Color">
-                    </div>
-
+        <div class="container text-center col-sm-4">
+            <form class="form-group col-md-18">
+                <label/> Model </label>
+                <input class="form-control col-md-6" type="text" size="10000px" name="model" maxlength="30" placeholder="audi"/>
+                <br/>
+                <label/> Supplier </label>
+                <input class="form-control" type="text" name="supplier" maxlength="30" placeholder="tt"/>
+                <br/>   <br/>
+                <div class="col-md-12">
+                    <div class="col-md-4"></div>
+                    <input type="submit" class="btn btn-success col-md-4"  align="center" value="search"/>
                 </div>
-            </div>
-            <br>
-            <button type="submit" class="btn btn-primary">Search</button>
-        </form>
+            </form>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+        </div>
 
+        <table class="table table-hover col-md-20">
+            <tr>
+                <th class="col-md-2">Name</th>
+                <th class="col-md-2">Login</th>
+                <th class="col-md-2">E-mail</th>
+                <th class="col-md-2">Phone number</th>
+                <th class="col-md-2">Birth date</th>
+                <th class="col-md-2">Status</th>
+                <th class="col-md-2">Role</th>
+            </tr>
+            <c:forEach var="user" items="#{requestScope.users}">
+                <tr class="info" >
+                    <td class="col-md-2">${user.getName()}</td>
+                    <td class="col-md-2">${user.getLogin()}</td>
+                    <td class="col-md-2">${user.getContacts().getEmail()}</td>
+                    <td class="col-md-2">${user.getContacts().getPhoneNumber()}</td>
+                    <td class="col-md-2">${user.getBirthDate()}</td>
+                    <td class="col-md-2">${user.getStatus()}</td>
+                    <td class="col-md-2">${user.getRole()}</td>
+                </tr>
+            </c:forEach>
+        </table>
 </body>
 </html>

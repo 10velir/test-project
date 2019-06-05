@@ -1,35 +1,28 @@
 package com.itacademy.service;
 
-import com.itacademy.database.DAO.impl.CarDao;
-import com.itacademy.database.DAO.impl.FilterSearch;
-import com.itacademy.database.entities.Car;
+import com.itacademy.database.DAO.impl.UserDao;
+import com.itacademy.database.DAO.impl.UserSearchFilter;
+import com.itacademy.database.entities.User;
+
+import java.util.List;
 
 public class UserService {
 
     private static final UserService INSTANCE = new UserService();
 
-    public final CarDao carDao = CarDao.getInstance();
-
-     public Car getByModel(String model){
-        try {
-            return carDao.getByModel(model).get(0);
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        } return null;
-    }
-
-    public FilterSearch createFilter(String field, String parameter) {
-         FilterSearch filterSearch = new FilterSearch();
-         filterSearch.setField(field);
-         filterSearch.setParameter(parameter);
-         return filterSearch;
-    }
-
-    public Car getWithFilters(String firstFilter, String firstParam) {
-         return carDao.getWithFilters(createFilter(firstFilter, firstParam)).getSingleResult();
-    }
+    public final UserDao userDao = UserDao.getInstance();
 
     public static UserService getInstance() {
         return INSTANCE;
+    }
+
+    public List<User> getWithFilters(UserSearchFilter userSearchFilter) {
+
+        return userDao.getWithFilters(userSearchFilter);
+    }
+
+    public List<User> getAll() {
+
+        return userDao.getAll();
     }
 }

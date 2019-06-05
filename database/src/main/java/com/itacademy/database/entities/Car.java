@@ -20,7 +20,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(callSuper = true)
+@ToString(exclude = "users")
 @EqualsAndHashCode(of = "id")
 @Builder
 @Entity

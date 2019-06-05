@@ -15,4 +15,6 @@ public class SessionManager {
     public static Session getSession() {
         return factory.openSession();
     }
+
+
 }
