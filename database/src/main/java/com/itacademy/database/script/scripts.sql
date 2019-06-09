@@ -13,7 +13,7 @@ CREATE TABLE car
 
 DROP TABLE rental_company.address;
 CREATE TABLE address (
-                         id BIGSERIAL PRIMARY KEY,
+                         id INTEGER PRIMARY KEY,
                          city VARCHAR(64) NOT NULL,
                          street VARCHAR(64) NOT NULL
 );

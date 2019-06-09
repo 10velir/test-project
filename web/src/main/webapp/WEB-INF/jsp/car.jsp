@@ -46,25 +46,19 @@
 
         <table class="table table-hover col-md-20">
             <tr>
-                <th class="col-md-2">Name</th>
-                <th class="col-md-2">Login</th>
-                <th class="col-md-2">E-mail</th>
-                <th class="col-md-2">Phone number</th>
-                <th class="col-md-2">Birth date</th>
-                <th class="col-md-2">Status</th>
-                <th class="col-md-2">Role</th>
+                <th class="col-md-2">Supplier</th>
+                <th class="col-md-2">Model</th>
+                <th class="col-md-2">Max Speed</th>
+                <th class="col-md-2">Price</th>
             </tr>
-         <%--   <c:forEach var="user" items="#{requestScope.cars}">
+            <c:forEach var="car" items="#{requestScope.cars}">
                 <tr class="info" >
-                    <td class="col-md-2">${user.getName()}</td>
-                    <td class="col-md-2">${user.getLogin()}</td>
-                    <td class="col-md-2">${user.getContacts().getEmail()}</td>
-                    <td class="col-md-2">${user.getContacts().getPhoneNumber()}</td>
-                    <td class="col-md-2">${user.getBirthDate()}</td>
-                    <td class="col-md-2">${user.getStatus()}</td>
-                    <td class="col-md-2">${user.getRole()}</td>
+                    <td class="col-md-2">${car.getSupplier()}</td>
+                    <td class="col-md-2">${car.getModel()}</td>
+                    <td class="col-md-2">${car.getMaxSpeed()}</td>
+                    <td class="col-md-2">${car.getPrice()}</td>
                 </tr>
-            </c:forEach>--%>
+            </c:forEach>
         </table>
 </body>
 </html>
