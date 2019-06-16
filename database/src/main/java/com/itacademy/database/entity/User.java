@@ -1,5 +1,7 @@
 package com.itacademy.database.entity;
 
+import com.itacademy.database.entity.enumeration.Role;
+import com.itacademy.database.entity.enumeration.UserStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -40,7 +42,7 @@ import java.util.Set;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class User extends BaseEntity<Long> {
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
     @Column(name = "login", nullable = false, unique = true)
@@ -61,8 +63,8 @@ public class User extends BaseEntity<Long> {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToOne(mappedBy = "owner", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "passport_id")
     private Passport passport;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)

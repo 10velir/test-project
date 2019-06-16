@@ -7,17 +7,17 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Data
 @ToString(of = {"series", "number"}, callSuper = true)
 @NoArgsConstructor
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = {"series", "number"}, callSuper = true)
 @AllArgsConstructor
 @Builder
 @Entity
@@ -30,7 +30,7 @@ public class Passport extends BaseEntity<Integer> {
     @Column(name = "number", nullable = false, unique = true)
     private String number;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @OneToOne(mappedBy = "passport", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
     private User owner;
 }
