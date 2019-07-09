@@ -6,6 +6,7 @@ import com.itacademy.service.dto.OrderDto;
 import com.itacademy.service.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +30,6 @@ public class OrderController {
 
     @GetMapping
     public String getPage(Model model) {
-        System.out.println("ORDERS: " + orderService.getAll());
         model.addAttribute("orders", orderService.getAll());
 
         return "order";

@@ -1,22 +1,42 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Car</title>
-    <head>
-        <title>SearchPage</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-        <style>input[type="text"] {
-            font-size: 24px;
-            height: 30px;
-            width: 500px;
-        }</style>
-    </head>
+    <title>Welcome</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>input[type="text"] {
+        font-size: 24px;
+        height: 30px;
+        width: 500px;
+    }</style>
 </head>
 <body>
-welcome
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">anytime</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="welcome.html">Home</a></li>
+            <li><a href="car.html">Cars</a></li>
+            <li><a href="order.html">Orders</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="profile.html"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <h3> Welcome
+        <div th:text="${currentUser.getLogin()}"> User!</div>
+    </h3>
+    <p>Take your dream car here!</p>
+</div>
 </body>
 </html>
+
+

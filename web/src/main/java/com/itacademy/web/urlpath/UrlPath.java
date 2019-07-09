@@ -16,5 +16,6 @@ public class UrlPath {
     public static final String EDIT_PROFILE = "/editProfile";
     public static final String SAVE_PROFILE = "/saveProfile";
     public static final String DECISION = "/decision";
+    public static final String REGISTRATION = "/registration";
 
 }

@@ -5,6 +5,7 @@ import com.itacademy.service.dto.UserDto;
 import com.itacademy.service.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,7 +51,10 @@ public class UserController {
     }
 
     @PostMapping(SAVE_PROFILE)
-    public String saveProfile(Model model, @ModelAttribute("currentUser") User user, UserDto userDto) {
+    public String saveProfile(Model model, @ModelAttribute("currentUser") User user, UserDto userDto, PasswordEncoder passwordEncoder) {
+        if(!userDto.getPassword().equals("")) {
+            userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        }
         model.addAttribute("currentUser", userService.updateUser(user, userDto));
 
         return "editProfile";

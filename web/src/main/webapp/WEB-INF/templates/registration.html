@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Login</title>
+    <title>Registration</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -25,21 +25,22 @@
             <li><a href="order.html">Orders</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="registration.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li class="active"><a href="registration.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
+            </li>
         </ul>
     </div>
 </nav>
 <div class="row">
     <div class="col-sm-4"></div>
     <div class="col-sm-4">
-        <form class="form-signin" th:action="@{/api/login}" th:method="post">
-            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <form class="form-signin" th:action="@{/api/registration}" th:method="post">
+            <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
             <label for="username"></label><input class="form-control" type="email" id="username" name="username"
                                                  maxlength="30" placeholder="Email address" required autofocus/>
             <label for="password"></label><input class="form-control" type="password" id="password" name="password"
                                                  maxlength="30" placeholder="Password" required/>
             <br/>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
         </form>
     </div>
     <div class="col-sm-4"></div>

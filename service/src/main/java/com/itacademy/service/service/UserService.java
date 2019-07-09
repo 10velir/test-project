@@ -16,38 +16,42 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.util.ReflectionUtils.findField;
-
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserService {
 
-      private final UserRepository userRepository;
-      private final AddressRepository addressRepository;
+    private final UserRepository userRepository;
+    private final AddressRepository addressRepository;
 
-      public List<User> getWithFilters(UserSearchFilter userSearchFilter) {
-          return userRepository.getWithFilters(userSearchFilter);
-      }
+    public List<User> getWithFilters(UserSearchFilter userSearchFilter) {
+        return userRepository.getWithFilters(userSearchFilter);
+    }
 
-      public Iterable<User> getAll() {
-          return userRepository.findAll();
-      }
+    public Iterable<User> getAll() {
+        return userRepository.findAll();
+    }
 
-      @Transactional
-      public Optional<User> login(LoginDto loginDto) {
-          return userRepository.findByLoginAndPassword(loginDto.getUsername(), loginDto.getPassword());
-      }
+    @Transactional
+    public Optional<User> login(LoginDto loginDto) {
+        return userRepository.findByLoginAndPassword(loginDto.getUsername(), loginDto.getPassword());
+    }
 
-      @Transactional
-      public User getByLogin(String login) {
-          return userRepository.getUserByLogin(login);
-      }
+    @Transactional
+    public Optional<User> getByLogin(String login) {
+        return userRepository.getUserByLogin(login);
+    }
 
-      public User updateUser(User user, UserDto userDto) {
-          Mapper.MapDtoToEntity(userDto, user, null);
+    @Transactional
+    public User findByLogin(String login) {
+        return userRepository.findByLogin(login);
+    }
+
+    @Transactional
+    public User updateUser(User user, UserDto userDto) {
+        Mapper.MapDtoToEntity(userDto, user, null);
         /*  user.setPassword(userDto.getPassword());
           user.setName(userDto.getName());
           user.setContacts(Contacts.builder()
@@ -65,4 +69,8 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    @Transactional
+    public User register(User user) {
+        return userRepository.save(user);
+    }
 }

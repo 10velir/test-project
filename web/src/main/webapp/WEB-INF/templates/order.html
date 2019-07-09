@@ -1,22 +1,35 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
     <title>Orders</title>
-    <head>
-        <title>SearchPage</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-        <style>input[type="text"] {
-            font-size: 24px;
-            height: 30px;
-            width: 500px;
-        }</style>
-    </head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>input[type="text"] {
+        font-size: 24px;
+        height: 30px;
+        width: 500px;
+    }</style>
 </head>
 <body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">anytime</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="welcome.html">Home</a></li>
+            <li><a href="car.html">Cars</a></li>
+            <li class="active"><a href="order.html">Orders</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="profile.html"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+        </ul>
+    </div>
+</nav>
 <div>
     <div class="col-md-2"></div>
     <div class="col-md-8">
@@ -26,22 +39,24 @@
                 <th class="col-md-2">Lease Date&Time from</th>
                 <th class="col-md-2">Lease Date&Time to</th>
                 <th class="col-md-2">PassportDetails</th>
-                <th class="col-md-2">Admin Approval</th>
-                <th class="col-md-2">Notes</th>
-                <th  class="col-md-2">Admin menu</th>
+                <th class="col-md-1">Admin Approval</th>
+                <th class="col-md-3">Notes</th>
+                <th class="col-md-2">Admin menu</th>
             </tr>
             <div th:each="ord : *{orders}">
                 <tr class="info">
                     <td th:text="${ord.getLeaseDateAndTimeFrom()}" class="col-md-2">LeasePeriodFrom</td>
                     <td th:text="${ord.getLeaseDateAndTimeTo()}" class="col-md-2">LeasePeriodTo</td>
                     <td th:text="${ord.getPassportDetails()}" class=" col-md-2">PassportDetails</td>
-                    <td th:text="${ord.getAdminApproval()}" class="col-md-2">Admin Approval</td>
-                    <td th:text="${ord.getNotes()}" class="col-md-2">Notes</td>
+                    <td th:text="${ord.getAdminApproval()}" class="col-md-1">Admin Approval</td>
+                    <td th:text="${ord.getNotes()}" class="col-md-3">Notes</td>
                     <td class="col-md-2">
-                        <form action="/api/order/answer" method="post">
-                            <input type="hidden" th:value="${ord.getId()}" name="orderId">
-                            <input type="submit" class="btn-success" name="submit" value="Рассмотреть">
-                        </form>
+                        <div>
+                            <form action="/api/order/answer" method="post">
+                                <input type="hidden" th:value="${ord.getId()}" name="orderId">
+                                <input type="submit" class="btn-success" name="submit" value="Рассмотреть">
+                            </form>
+                        </div>
                     </td>
                 </tr>
             </div>

@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static com.itacademy.web.urlpath.UrlPath.API;
 import static com.itacademy.web.urlpath.UrlPath.CAR;
+import static com.itacademy.web.urlpath.UrlPath.LEASE;
 import static com.itacademy.web.urlpath.UrlPath.LOGIN;
 import static com.itacademy.web.urlpath.UrlPath.WELCOME;
 
@@ -32,14 +33,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(API + WELCOME).hasAuthority("ADMIN")
                 .antMatchers(API + CAR).hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(API + CAR + LEASE).anonymous()/* ("USER")*/
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
                 .loginPage(API + LOGIN)
-                .defaultSuccessUrl("/api/car")
+                .defaultSuccessUrl("/api/welcome")
                 .and()
                 .logout();
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -57,4 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authProvider());
     }
+
+
+
 }

@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.OptimisticLockType;
+import org.hibernate.annotations.OptimisticLocking;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,6 +19,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +31,8 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "car", schema = "rental_company")
+@OptimisticLocking(type = OptimisticLockType.VERSION)
+//@DynamicUpdate
 public class Car extends BaseEntity<Long> {
 
     @Column(name = "supplier", nullable = false)
@@ -34,6 +40,9 @@ public class Car extends BaseEntity<Long> {
 
     @Column(name = "model", nullable = false)
     private String model;
+
+    @Version
+    private Long version;
 
     @Column(name = "max_speed")
     private Integer maxSpeed;

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import static com.itacademy.web.urlpath.UrlPath.API;
 import static com.itacademy.web.urlpath.UrlPath.LOGIN;
 
+
 @Controller
 @RequestMapping(API + LOGIN)
 @SessionAttributes({"currentUser"})
