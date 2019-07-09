@@ -17,6 +17,6 @@ public class CarSearchFilter {
     private String model;
     private Integer maxSpeed;
     private Integer price;
-    private Integer limit;
-    private Integer offset;
+    private Integer limit = 15;
+    private Integer offset = 0;
 }

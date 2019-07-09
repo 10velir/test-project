@@ -1,5 +1,7 @@
-.idea
-*.iml
 out
 gen
 log4j.log
+/target/**
+.idea/
+*.iml
+*.iws

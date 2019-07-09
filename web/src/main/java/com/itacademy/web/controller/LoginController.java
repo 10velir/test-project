@@ -1,10 +1,8 @@
 package com.itacademy.web.controller;
 
-import com.itacademy.database.entity.User;
-import com.itacademy.service.config.ServiceConfig;
+import com.itacademy.service.dto.LoginDto;
 import com.itacademy.service.service.UserService;
-import com.itacademy.web.dto.LoginDto;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +16,10 @@ import static com.itacademy.web.urlpath.UrlPath.LOGIN;
 @Controller
 @RequestMapping(API + LOGIN)
 @SessionAttributes({"currentUser"})
+@RequiredArgsConstructor
 public class LoginController {
+
+    private final UserService userService;
 
     @GetMapping
     public String getPage() {
@@ -26,12 +27,11 @@ public class LoginController {
     }
 
     @PostMapping()
-    public String save(Model model, LoginDto loginDto) {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ServiceConfig.class);
-        UserService userService = context.getBean(UserService.class);
-        User user = userService.login(loginDto.getUsername(), loginDto.getPassword());
-        model.addAttribute("currentUser", user);
+    public String login(Model model, LoginDto loginDto) {
+        model.addAttribute("currentUser", userService.getByLogin(loginDto.getUsername()));
 
-        return "welcome";
+        return userService.login(loginDto)
+                .map(user -> "redirect:/api/profile")
+                .orElse("login");
     }
 }

@@ -1,4 +1,4 @@
-package com.itacademy.web.dto;
+package com.itacademy.service.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -25,6 +25,11 @@ public class CarDaoTest {
     private CarRepository carRepository;
 
     @Test
+    public void beanNotNullChecker() {
+        assertNotNull(carRepository);
+    }
+/*
+    @Test
     public void saveCarChecker() {
         Car bmw = Car.builder()
                 .model("X4")
@@ -56,5 +61,5 @@ public class CarDaoTest {
     public void getAllChecker() {
         List<Car> carList = (List<Car>) carRepository.findAll();
         assertNotNull(carList.size());
-    }
+    }*/
 }

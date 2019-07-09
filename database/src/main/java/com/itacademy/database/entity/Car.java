@@ -10,9 +10,11 @@ import lombok.ToString;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +22,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(callSuper = true, exclude = "users")
+@ToString(callSuper = true, exclude = {"users", "order"})
 @EqualsAndHashCode(callSuper = true)
 @Builder
 @Entity
@@ -45,4 +47,10 @@ public class Car extends BaseEntity<Long> {
                 joinColumns = @JoinColumn(name = "car_id"),
                 inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> users = new ArrayList<>();
+
+    @ManyToOne(targetEntity = ClientOrder.class,fetch = FetchType.LAZY)
+    @JoinTable(name = "client_order", schema = "rental_company",
+                joinColumns = @JoinColumn(name = "car_id"),
+                inverseJoinColumns = @JoinColumn(name = "id"))
+    private ClientOrder order = new ClientOrder();
 }

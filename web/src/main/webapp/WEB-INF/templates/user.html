@@ -24,8 +24,8 @@
         <th class="col-md-2">Status</th>
         <th class="col-md-2">Role</th>
     </tr>
-    <div th:each="user *{users}" >
-        <tr class="info" >
+    <div th:each="user *{users}">
+        <tr class="info">
             <td th:text="${user.getName()}" class="col-md-2">Name</td>
             <td th:text="${user.getBithDate()}" class=" col-md-2">Birth day</td>
             <td th:text="${user.getStatus()}" class="col-md-2">Status</td>

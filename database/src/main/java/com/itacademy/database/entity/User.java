@@ -32,8 +32,8 @@ import java.util.List;
 import java.util.Set;
 
 @Data
-@ToString(exclude = "passport", callSuper = true)
-@EqualsAndHashCode(callSuper = true)
+@ToString(exclude = {"cars", "orders"})
+@EqualsAndHashCode(exclude = {"cars", "address", "orders"}, callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity

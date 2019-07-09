@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Data
 @ToString
 @MappedSuperclass
-public abstract class BaseEntity<T extends Serializable> {
+abstract class BaseEntity<T extends Serializable> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

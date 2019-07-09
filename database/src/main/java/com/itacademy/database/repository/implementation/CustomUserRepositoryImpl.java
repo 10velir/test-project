@@ -26,12 +26,12 @@ public class CustomUserRepositoryImpl implements CustomUserRepository {
         Root<User> root = criteria.from(User.class);
 
         criteria.select(root);
-        if (searchFilter.getName() != null) {
+        if (!searchFilter.getName().equals("")) {
             criteria.where(
                     cb.equal(root.get(User_.name), searchFilter.getName())
             );
         }
-        if (searchFilter.getLogin() != null) {
+        if (!searchFilter.getLogin().equals("")) {
             criteria.where(
                     cb.equal(root.get(User_.login), searchFilter.getLogin())
             );

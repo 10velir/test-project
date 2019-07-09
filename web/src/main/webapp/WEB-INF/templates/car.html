@@ -3,53 +3,70 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Car</title>
-    <head>
-        <title>SearchPage</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-        <style>input[type="text"] {
-            font-size: 24px;
-            height: 30px;
-            width: 500px;
-        }</style>
-    </head>
+    <title>SearchPage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="container text-center col-sm-4">
-    <form class="form-group col-md-18">
-        <label/> Model </label>
-        <input class="form-control col-md-6" type="text" id="model" size="10000px" name="model" maxlength="30" placeholder="audi"/>
+<div class="col-md-12">
+    <div class="container text-center col-sm-5">
+        <form class="form-group" th:action="@{/api/car/search}" method="post">
+            <br/>
+            <label/> Supplier </label>
+            <input class="form-control" type="text" id="supplier" name="supplier" maxlength="30" placeholder="Audi"/>
+            <br>
+            <label/> Model </label>
+            <input class="form-control" type="text" id="model" name="model" maxlength="30" placeholder="TT"/>
+            <br/>
+            <label/> Max Speed </label>
+            <input class="form-control" type="text" id="max_speed" name="maxSpeed" maxlength="30" placeholder="200"/>
+            <br/>
+            <label/> Price </label>
+            <input class="form-control" type="text" id="dollars_per_hour" name="price" maxlength="30"
+                   placeholder="200"/>
+            <br/> <br/>
+            <div class="col-sm-2"> </div>
+            <input type="submit" class="btn btn-success col-md-4" value="Search"/>
+        </form>
+        <form class="form-group" th:action="@{/api/car}" method="get">
+            <input type="submit" class="btn btn-primary col-md-4" value="Reset"/>
+        </form>
         <br/>
-        <label/> Supplier </label>
-        <input class="form-control" type="text" id="supplier" name="supplier" maxlength="30" placeholder="tt"/>
-        <br/>   <br/>
-        <div class="col-md-12">
-            <div class="col-md-4"></div>
-            <input type="submit" class="btn btn-success col-md-4"  align="center" value="search"/>
-        </div>
-    </form>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-</div>
-<table class="table table-hover col-md-12">
-    <tr>
-        <th class="col-md-2">Supplier</th>
-        <th class="col-md-2">Model</th>
-        <th class="col-md-2">Max Speed</th>
-        <th class="col-md-2">Price</th>
-    </tr>
-    <div th:each="car : *{cars}" >
-        <tr class="info" >
-            <td th:text="${car.getSupplier()}" class="col-md-2">Supplier</td>
-            <td th:text="${car.getModel()}" class=" col-md-2">Model</td>
-            <td th:text="${car.getMaxSpeed()}" class="col-md-2">MaxSpeed</td>
-            <td th:text="${car.getPrice()}" class="col-md-2">Price</td>
-        </tr>
+        <br/>
+        <br/>
+        <br/>
     </div>
-</table>
+    <div class="col-md-7">
+        <h1 class="h3 mb-3 font-weight-normal" align="center">Cars list: </h1>
+        <table class="table table-hover table-dark">
+            <thead class="">
+            <tr>
+                <th class="col-md-2">Supplier</th>
+                <th class="col-md-2">Model</th>
+                <th class="col-md-2">Max Speed</th>
+                <th class="col-md-2">Price</th>
+            </tr>
+            <thead>
+            <tbody>
+            <div th:each="car : *{cars}">
+                <tr>
+                    <td th:text="${car.getSupplier()}" class="col-md-2">Supplier</td>
+                    <td th:text="${car.getModel()}" class=" col-md-2">Model</td>
+                    <td th:text="${car.getMaxSpeed()}" class="col-md-2">MaxSpeed</td>
+                    <td th:text="${car.getPrice()}" class="col-md-2">Price</td>
+                    <td>
+                        <form action="/api/car/lease" method="post">
+                            <input type="hidden" th:value="${car.getId()}" name="carId">
+                            <input type="submit" class="btn-success" name="submit" value="Арендовать">
+                        </form>
+                    </td>
+                </tr>
+            </div>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>

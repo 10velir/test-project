@@ -23,16 +23,16 @@ public class CustomCarRepositoryImpl implements CustomCarRepository {
 
         CriteriaQuery<Car> criteria = cb.createQuery(Car.class);
         Root<Car> root = criteria.from(Car.class);
-
         criteria.select(root);
-        if (searchFilter.getModel() != null) {
-            criteria.where(
-                    cb.equal(root.get(Car_.model), searchFilter.getModel())
-            );
-        }
-        if (searchFilter.getSupplier() != null) {
+
+        if (!searchFilter.getSupplier().equals("")) {
             criteria.where(
                     cb.equal(root.get(Car_.supplier), searchFilter.getSupplier())
+            );
+        }
+        if (!searchFilter.getModel().equals("")) {
+            criteria.where(
+                    cb.equal(root.get(Car_.model), searchFilter.getModel())
             );
         }
         if (searchFilter.getMaxSpeed() != null) {
