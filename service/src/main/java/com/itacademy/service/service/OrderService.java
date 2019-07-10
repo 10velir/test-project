@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@Transactional(readOnly = true)
+@Transactional
 public class OrderService {
 
     private final OrderRepository orderRepository;
@@ -36,19 +36,31 @@ public class OrderService {
         return orderRepository.findByUserId(userId);
     }
 
-    public Optional<ClientOrder> getById(Long id) {return orderRepository.findById(id);}
+    public Optional<ClientOrder> getById(Long id) {
+        return orderRepository.findById(id);
+    }
+
+    @Transactional
+    public ClientOrder save(ClientOrder clientOrder) {
+        return orderRepository.save(clientOrder);
+    }
 
     @Transactional
     public void createOrder(OrderDto dto, LeaseTImeDto tImeDto) {
-        User user = userRepository.getById(dto.getUserId());
-        Car car = carRepository.getById(dto.getCarId());
-        orderRepository.save(ClientOrder.builder()
-                .leaseDateAndTimeFrom(LocalDateTime.parse(tImeDto.getLeasePeriodStart()))
-                .leaseDateAndTimeTo(LocalDateTime.parse(tImeDto.getLeasePeriodEnd()))
-                .user(user)
-                .car(List.of(car))
-                .build()
-        );
-        car.getUsers().add(user);
+        try {
+            User user = userRepository.getById(dto.getUserId());
+            Car car = carRepository.getById(dto.getCarId());
+            orderRepository.save(ClientOrder.builder()
+                    .leaseDateAndTimeFrom(LocalDateTime.parse(tImeDto.getLeasePeriodStart()))
+                    .leaseDateAndTimeTo(LocalDateTime.parse(tImeDto.getLeasePeriodEnd()))
+                    .passportDetails(dto.getPassportDetails())
+                    .adminApproval(false)
+                    .user(user)
+                    .build()
+            );
+            user.getCars().add(car);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

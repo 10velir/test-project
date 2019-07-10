@@ -12,12 +12,16 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 
+
+import static com.itacademy.web.urlpath.UrlPath.ADMIN_ORDERS;
 import static com.itacademy.web.urlpath.UrlPath.API;
 import static com.itacademy.web.urlpath.UrlPath.CAR;
+import static com.itacademy.web.urlpath.UrlPath.DECISION;
 import static com.itacademy.web.urlpath.UrlPath.LEASE;
 import static com.itacademy.web.urlpath.UrlPath.LOGIN;
-import static com.itacademy.web.urlpath.UrlPath.WELCOME;
+import static com.itacademy.web.urlpath.UrlPath.ORDER;
 
 
 @Configuration
@@ -31,14 +35,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers(API + WELCOME).hasAuthority("ADMIN")
+                .antMatchers(API + ADMIN_ORDERS).hasAuthority("ADMIN")
+                .antMatchers(API + ORDER + DECISION).hasAnyAuthority("ADMIN")
                 .antMatchers(API + CAR).hasAnyAuthority("USER", "ADMIN")
-                .antMatchers(API + CAR + LEASE).anonymous()/* ("USER")*/
+                .antMatchers(API + CAR + LEASE).hasAnyAuthority("USER", "ADMIN")
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
                 .loginPage(API + LOGIN)
                 .defaultSuccessUrl("/api/welcome")
+                .and().httpBasic()
                 .and()
                 .logout();
     }
@@ -61,6 +67,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(authProvider());
     }
 
-
-
+    @Bean   //was added
+    public SpringSecurityDialect securityDialect() {
+        return new SpringSecurityDialect();
+    }
 }

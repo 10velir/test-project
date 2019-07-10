@@ -1,6 +1,10 @@
 package com.itacademy.service.service;
 
+import com.itacademy.database.entity.Address;
+import com.itacademy.database.entity.Contacts;
 import com.itacademy.database.entity.User;
+import com.itacademy.database.entity.enumeration.Role;
+import com.itacademy.database.entity.enumeration.UserStatus;
 import com.itacademy.database.fitler.UserSearchFilter;
 import com.itacademy.database.repository.AddressRepository;
 import com.itacademy.database.repository.UserRepository;
@@ -10,16 +14,18 @@ import com.itacademy.service.util.Mapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 
 @Service
-@Transactional(readOnly = true)
 @Slf4j
+@Transactional(readOnly = true)
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserService {
 
@@ -44,33 +50,31 @@ public class UserService {
         return userRepository.getUserByLogin(login);
     }
 
-    @Transactional
     public User findByLogin(String login) {
         return userRepository.findByLogin(login);
     }
 
     @Transactional
     public User updateUser(User user, UserDto userDto) {
-        Mapper.MapDtoToEntity(userDto, user, null);
-        /*  user.setPassword(userDto.getPassword());
-          user.setName(userDto.getName());
-          user.setContacts(Contacts.builder()
-                .email(userDto.getEmail())
-                .phoneNumber(userDto.getPhoneNumber())
-                .build());
-        Address address = Address.builder()
-                .city(userDto.getCity())
-                .street(userDto.getStreet())
-                .build();
+        Mapper.MapDtoToEntity(userDto, user, List.of("login"));
+
+        Address address = new Address();
+        if(!userDto.getCity().equals("")) {
+            address.setCity(userDto.getCity());
+        }
+        if(!userDto.getStreet().equals("")) {
+            address.setStreet(userDto.getStreet());
+        }
         address.setUsers(Set.of(user));
         addressRepository.save(address);
-        user.setAddress(address);*/
-
+        user.setAddress(address);
         return userRepository.save(user);
     }
 
     @Transactional
     public User register(User user) {
+        user.setRole(Role.USER);
+        user.setStatus(UserStatus.ACTIVE);
         return userRepository.save(user);
     }
 }

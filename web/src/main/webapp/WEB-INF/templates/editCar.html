@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Edit profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>
+        input[type="text"] {
+            font-size: 24px;
+            height: 30px;
+            width: 500px;
+        }</style>
+</head>
+<body><nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/api/home">anytime</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="/api/welcome">Home</a></li>
+            <li class="active"><a href="/api/car">Cars</a></li>
+            <li><a href="/api/order">Orders</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li sec:authorize="hasAnyAuthority('ADMIN')">
+                <form sec:authorize="hasAnyAuthority('ADMIN')" th:action="@{/api/order/adminOrders}" method="post">
+                    <input type="submit" class="btn-primary" name="submit" value="Admin menu">
+                </form>
+            </li>
+            <li><a href="/api/profile"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="col-md-12">
+    <div class="col-md-6">
+        <div class="container text-center col-sm-5">
+            <form class="form-group" th:action="@{/api/car/saveCar}" method="post">
+                <br/>
+                <label> Supplier: </label>
+                <input class="form-control" type="text" id="supplier" name="supplierDto" maxlength="30"
+                       placeholder="supplier"/>
+                <br>
+                <label> Model: </label>
+                <input class="form-control" type="text" id="model" name="modelDto" maxlength="30"
+                       placeholder="model"/>
+                <br/>
+                <label> Max Speed: </label>
+                <input class="form-control" type="text" id="maxSpeed" name="maxSpeedDto" maxlength="30"
+                       placeholder="maxSpeed"/>
+                <br/>
+                <label> Price: </label>
+                <input class="form-control" type="text" id="price" name="priceDto" maxlength="30"
+                       placeholder="price"/>
+                <div class="col-sm-4"></div>
+                <br/>
+                <input type="submit" class="btn btn-success col-md-8" value="Save"/>
+            </form>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h1 class="bg-primary" align="center"> Current Car: </h1>
+        <h3 class="bg-info">Supplier: <span class="t" th:text="${currentCar.getSupplier()}"> Supplier </span>
+        </h3>
+        <h3 class="bg-info">Model: <span th:text="${currentCar.getModel()}"> Model </span>
+        </h3>
+        <h3 class="bg-info">Max Speed: <span class="" th:text="${currentCar.getMaxSpeed()}"> Max Speed </span>
+        </h3>
+        <h3 class="bg-info">Price: <span class="" th:text="${currentCar.getPrice()}"> Price </span>
+        </h3>
+        <br/>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">This button do nothing</button>
+    </div>
+</div>
+</body>
+</html>

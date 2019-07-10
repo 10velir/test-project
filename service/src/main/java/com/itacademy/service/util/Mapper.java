@@ -14,7 +14,7 @@ import static org.springframework.util.ReflectionUtils.setField;
 @Slf4j
 public class Mapper {
 
-    public static void MapDtoToEntity(Object from, Object to, List<String> exclude, String... mapParams) {
+    public static Object MapDtoToEntity(Object from, Object to, List<String> exclude, String... mapParams) {
         Stream.of(from.getClass().getDeclaredFields())
                 .peek(field -> field.setAccessible(true))
                 .filter(field -> exclude == null || !exclude.contains(field.getName()))
@@ -39,6 +39,7 @@ public class Mapper {
                         setField(toField, to, getField(field, from));
                     }
                 });
+        return to;
     }
 
     private static Optional<String> findAssociasion(String findField, String... strings) {

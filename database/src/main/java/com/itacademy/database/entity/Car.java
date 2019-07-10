@@ -32,7 +32,7 @@ import java.util.List;
 @Entity
 @Table(name = "car", schema = "rental_company")
 @OptimisticLocking(type = OptimisticLockType.VERSION)
-//@DynamicUpdate
+@DynamicUpdate
 public class Car extends BaseEntity<Long> {
 
     @Column(name = "supplier", nullable = false)
@@ -57,9 +57,9 @@ public class Car extends BaseEntity<Long> {
                 inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> users = new ArrayList<>();
 
-    @ManyToOne(targetEntity = ClientOrder.class,fetch = FetchType.LAZY)
+/*    @ManyToOne(targetEntity = ClientOrder.class,fetch = FetchType.LAZY)
     @JoinTable(name = "client_order", schema = "rental_company",
                 joinColumns = @JoinColumn(name = "car_id"),
                 inverseJoinColumns = @JoinColumn(name = "id"))
-    private ClientOrder order = new ClientOrder();
+    private ClientOrder order = new ClientOrder();*/
 }

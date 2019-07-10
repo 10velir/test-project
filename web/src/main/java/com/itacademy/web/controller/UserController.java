@@ -5,7 +5,7 @@ import com.itacademy.service.dto.UserDto;
 import com.itacademy.service.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +27,7 @@ import static com.itacademy.web.urlpath.UrlPath.USER;
 public class UserController {
 
     private final UserService userService;
+    private final BCryptPasswordEncoder encoder;
 
     @GetMapping(USER)
     public String getPage(Model model) {
@@ -38,6 +39,8 @@ public class UserController {
     @GetMapping(PROFILE)
     public String getProfile(Model model, @ModelAttribute("currentUser") User user) {
         model.addAttribute("currentUser", user);
+        model.addAttribute("phone", user.getContacts().getPhoneNumber());
+        model.addAttribute("email", user.getContacts().getEmail());
 
         return "profile";
     }
@@ -51,10 +54,17 @@ public class UserController {
     }
 
     @PostMapping(SAVE_PROFILE)
-    public String saveProfile(Model model, @ModelAttribute("currentUser") User user, UserDto userDto, PasswordEncoder passwordEncoder) {
+    public String saveProfile(Model model, @ModelAttribute("currentUser") User user, UserDto userDto) {
         if(!userDto.getPassword().equals("")) {
-            userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
+            userDto.setPassword(encoder.encode(userDto.getPassword()));
         }
+       /* model.addAttribute("currentUser", userService.register(
+                User.builder()
+                        .name(userDto.getName())
+                        .password(userDto.getPassword())
+                        .build()
+        ));*/
+
         model.addAttribute("currentUser", userService.updateUser(user, userDto));
 
         return "editProfile";

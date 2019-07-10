@@ -11,9 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringRunner.class)
@@ -23,12 +21,12 @@ public class CarDaoTest {
 
     @Autowired
     private CarRepository carRepository;
-
+/*
     @Test
     public void beanNotNullChecker() {
         assertNotNull(carRepository);
     }
-/*
+
     @Test
     public void saveCarChecker() {
         Car bmw = Car.builder()
@@ -53,13 +51,13 @@ public class CarDaoTest {
 
     @Test
     public void getByIdChecker() {
-        Optional<Car> carById = carRepository.findById(22L);
+        Optional<Car> carById = carRepository.findById(17L);
         assertNotEquals(carById, Optional.empty());
-    }
+    }*/
 
     @Test
     public void getAllChecker() {
         List<Car> carList = (List<Car>) carRepository.findAll();
         assertNotNull(carList.size());
-    }*/
+    }
 }

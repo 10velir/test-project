@@ -49,14 +49,23 @@
                 <th class="col-md-2">PassportDetails</th>
                 <th class="col-md-1">Admin Approval</th>
                 <th class="col-md-3">Notes</th>
+                <th class="col-md-2">Admin menu</th>
             </tr>
             <div th:each="ord : *{orders}">
-                <tr class="info">
+                <tr th:if="${ord.getAdminApproval()==false}" class="info">
                     <td th:text="${ord.getLeaseDateAndTimeFrom()}" class="col-md-2">LeasePeriodFrom</td>
                     <td th:text="${ord.getLeaseDateAndTimeTo()}" class="col-md-2">LeasePeriodTo</td>
                     <td th:text="${ord.getPassportDetails()}" class=" col-md-2">PassportDetails</td>
                     <td th:text="${ord.getAdminApproval()}" class="col-md-1">Admin Approval</td>
                     <td th:text="${ord.getNotes()}" class="col-md-3">Notes</td>
+                    <td class="col-md-2">
+                        <div>
+                            <form th:action="@{/api/order/decision}" method="post">
+                                <input type="hidden" th:value="${ord.getId()}" name="orderId">
+                                <input type="submit" class="btn-success" name="submit" value="Рассмотреть">
+                            </form>
+                        </div>
+                    </td>
                 </tr>
             </div>
         </table>

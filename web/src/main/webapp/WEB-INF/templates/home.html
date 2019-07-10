@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Welcome</title>
+    <title>Cars</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -15,20 +15,6 @@
             -moz-background-size: cover;
             background-size: cover;
             -o-background-size: cover;
-        }
-
-        /* .masthead {
-             height: 100vh;
-             min-height: 500px;
-             background-image: url('https://source.unsplash.com/user/erondu/1600x900');
-             background-size: cover;
-             background-position: center;
-             background-repeat: no-repeat;
-         }*/
-        input[type="text"] {
-            font-size: 24px;
-            height: 30px;
-            width: 500px;
         }
 
         .semiopacity {
@@ -46,7 +32,7 @@
             <a class="navbar-brand" href="/api/home">anytime</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="/api/welcome">Home</a></li>
+            <li><a href="/api/welcome">Home</a></li>
             <li><a href="/api/car">Cars</a></li>
             <li><a href="/api/order">Orders</a></li>
         </ul>
@@ -61,21 +47,31 @@
         </ul>
     </div>
 </nav>
-
-<header class="masthead">
-    <div class="container h-110">
-        <div class="row h-100 align-items-center">
-            <div class="col-12 text-center">
-                <h2 class="semiopacity">
-                    Welcome
-                    <div class="semiopacity" th:text="${currentUser.getLogin()}"> User!</div>
-                </h2>
-                <h2 class="semiopacity">Take your dream car here!</h2>
-            </div>
-        </div>
+<div class="col-md-12">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <h3 align="center" class="semiopacity">
+            Об Anytime
+        </h3>
+        <h3 class="semiopacity">
+            С нами всегда выгодно.
+            Начните пользоваться каршерингом и Вы навсегда забудете о расходах на личный автомобиль.
+        </h3>
+        <h3 class="semiopacity">
+            Все включено в тариф.
+            Мы сами позаботимся о расходах на бензин, парковке, мойке, страховке и обслуживании авто.
+        </h3>
+        <h3 class="semiopacity">
+            Будьте мобильным 24/7.
+            Скачивайте приложение и управляйте своим временем. Аренда любого автомобиля когда угодно и где удобно.
+        </h3>
+        <h3 class="semiopacity">
+            Комфортнее такси и общественного транспорта.
+            Новые, чистые, удобные автомобили. Вы сами выбираете маршрут и управляете авто.
+        </h3>
     </div>
-</header>
+    <div class="col-md-3"></div>
+</div>
+
 </body>
 </html>
-
-

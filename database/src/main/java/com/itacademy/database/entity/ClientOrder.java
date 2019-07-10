@@ -47,6 +47,6 @@ public class ClientOrder extends BaseEntity<Long> {
     @JoinColumn(name = "client_id")
     private User user = new User();
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Car> car = new ArrayList<>();
+    /*@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Car> car = new ArrayList<>();*/
 }

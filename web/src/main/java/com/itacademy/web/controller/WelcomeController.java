@@ -28,7 +28,6 @@ public class WelcomeController {
         Object principal = securityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof UserDetails) {
             userName = ((UserDetails) principal).getUsername();
-            System.out.println("user name: " + userName);
         } else {
             userName = principal.toString();
         }

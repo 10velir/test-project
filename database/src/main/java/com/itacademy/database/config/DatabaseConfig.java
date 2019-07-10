@@ -18,7 +18,7 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.Properties;
 
-@Configuration()
+@Configuration
 @ComponentScan("com.itacademy.database")
 @PropertySource({"classpath:database.properties", "classpath:hibernate.properties"})
 @EnableTransactionManagement

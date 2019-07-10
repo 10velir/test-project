@@ -1,17 +1,42 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Lease</title>
+    <title>Cars</title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>
+        input[type="text"] {
+            font-size: 24px;
+            height: 30px;
+            width: 500px;
+        }</style>
 </head>
 <body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/api/home">anytime</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="/api/welcome">Home</a></li>
+            <li class="active"><a href="/api/car">Cars</a></li>
+            <li><a href="/api/order">Orders</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li sec:authorize="hasAnyAuthority('ADMIN')">
+                <form sec:authorize="hasAnyAuthority('ADMIN')" th:action="@{/api/order/adminOrders}" method="post">
+                    <input type="submit" class="btn-primary" name="submit" value="Admin menu">
+                </form>
+            </li>
+            <li><a href="/api/profile"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+        </ul>
+    </div>
+</nav>
 <div class="col-md-12">
     <div class="col-md-3"></div>
     <div class="col-md-6">
@@ -33,16 +58,27 @@
     <div class="col-md-6">
         <form th:action="@{/api/order/createOrder}" th:method="post">
             <div>
-                <h4 class="bg-info"><label for="leasePeriodStart">Enter a date and time for your lease start:</label></h4>
-                <input id="leasePeriodStart" type="datetime-local" name="leasePeriodStart" value="2019-06-20T22:33:53.074599800" >
+                <h4 class="bg-info"><label for="leasePeriodStart">Enter a date and time for your lease start:</label>
+                </h4>
+                <input id="leasePeriodStart" type="datetime-local" name="leasePeriodStart"
+                       value="2019-06-20T22:33:53.074599800">
             </div>
             <div>
-                <h4 class="bg-info"><label for="leasePeriodEnd">Enter a date and time for your end of lease :</label></h4>
-                <input id="leasePeriodEnd" type="datetime-local" name="leasePeriodEnd" value="2019-06-20T22:33:53.074599800" >
+                <h4 class="bg-info"><label for="leasePeriodEnd">Enter a date and time for your end of lease :</label>
+                </h4>
+                <input id="leasePeriodEnd" type="datetime-local" name="leasePeriodEnd"
+                       value="2019-06-20T22:33:53.074599800">
             </div>
+
+            <label for="passportDetails">Enter your passport details: </label><input class="form-control colortext" type="text" id="passportDetails"
+                                                 name="passportDetails"
+                                                 maxlength="30" placeholder="Passport details" required/>
             <br/>
             <input type="hidden" th:value="${currentCar.getId()}" name="carId">
             <input type="hidden" th:value="${userId}" name="userId">
+            <input type="hidden"
+                   th:name="${_csrf.parameterName}"
+                   th:value="${_csrf.token}"/>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Accept</button>
         </form>
         <div class="col-md-3"></div>

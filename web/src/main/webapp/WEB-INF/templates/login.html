@@ -7,17 +7,39 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <style>input[type="text"] {
-        font-size: 24px;
-        height: 30px;
-        width: 500px;
-    }</style>
+    <style>
+        body {
+            background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            background-size: cover;
+            -o-background-size: cover;
+        }
+
+        .colortext {
+            background-color: whitesmoke; /* Цвет фона */
+            opacity: 0.7; /* Полупрозрачный фон */
+            color: black; /* Цвет текста */
+        }
+
+        .colorbutton {
+            background-color: dodgerblue; /* Цвет фона */
+            opacity: 0.7; /* Полупрозрачный фон */
+            color: black; /* Цвет текста */
+        }
+
+        input[type="text"] {
+            font-size: 24px;
+            height: 30px;
+            width: 500px;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">anytime</a>
+            <a class="navbar-brand" href="home.html">anytime</a>
         </div>
         <ul class="nav navbar-nav">
             <li><a href="welcome.html">Home</a></li>
@@ -25,21 +47,23 @@
             <li><a href="order.html">Orders</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="registration.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="/api/registration"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
         </ul>
     </div>
 </nav>
 <div class="row">
     <div class="col-sm-4"></div>
-    <div class="col-sm-4">
+    <div class="col-sm-3">
         <form class="form-signin" th:action="@{/api/login}" th:method="post">
-            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-            <label for="username"></label><input class="form-control" type="email" id="username" name="username"
+            <h1 class="h2 mb-3 font-weight-normal">Please sign in</h1>
+            <label for="username"></label><input class="form-control colortext" type="email" id="username"
+                                                 name="username"
                                                  maxlength="30" placeholder="Email address" required autofocus/>
-            <label for="password"></label><input class="form-control" type="password" id="password" name="password"
+            <label for="password"></label><input class="form-control colortext" type="password" id="password"
+                                                 name="password"
                                                  maxlength="30" placeholder="Password" required/>
             <br/>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <button class="btn btn-lg btn-primary btn-block colorbutton" type="submit">Sign in</button>
         </form>
     </div>
     <div class="col-sm-4"></div>

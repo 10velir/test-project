@@ -17,5 +17,11 @@ public class UrlPath {
     public static final String SAVE_PROFILE = "/saveProfile";
     public static final String DECISION = "/decision";
     public static final String REGISTRATION = "/registration";
+    public static final String SAVE_DECISION = "/saveDecision";
+    public static final String HOME = "/home";
+    public static final String EDIT_CAR = "/editCar";
+    public static final String SAVE_CAR = "/saveCar";
+    public static final String ALL = "/all";
+    public static final String ADMIN_ORDERS = "/adminOrders";
 
 }
