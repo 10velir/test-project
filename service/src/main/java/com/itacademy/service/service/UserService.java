@@ -14,7 +14,6 @@ import com.itacademy.service.util.Mapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -57,18 +56,37 @@ public class UserService {
     @Transactional
     public User updateUser(User user, UserDto userDto) {
         Mapper.MapDtoToEntity(userDto, user, List.of("login"));
-
+        System.out.println("USER DTO IN UPDATE: " + userDto);
         Address address = new Address();
-        if(!userDto.getCity().equals("")) {
+        if (!userDto.getCity().equals("")) {
             address.setCity(userDto.getCity());
         }
-        if(!userDto.getStreet().equals("")) {
+        if (!userDto.getStreet().equals("")) {
             address.setStreet(userDto.getStreet());
         }
-        address.setUsers(Set.of(user));
-        addressRepository.save(address);
-        user.setAddress(address);
-        return userRepository.save(user);
+        try {
+            if (!address.getStreet().equals("") && !address.getCity().equals("")) {
+                address.setUsers(Set.of(user));
+                addressRepository.save(address);
+                user.setAddress(address);
+                return userRepository.save(user);
+            } else {
+                if(!address.getCity().equals("")) {
+                    address.setCity(userDto.getCity());
+                    addressRepository.save(address);
+                    user.setAddress(address);
+                    return userRepository.save(user);
+                } else if(!address.getStreet().equals("")) {
+                    address.setStreet(userDto.getStreet());
+                    addressRepository.save(address);
+                    user.setAddress(address);
+                    return userRepository.save(user);
+                }
+            }
+
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        } return user;
     }
 
     @Transactional

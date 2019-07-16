@@ -39,9 +39,6 @@ public class UserController {
     @GetMapping(PROFILE)
     public String getProfile(Model model, @ModelAttribute("currentUser") User user) {
         model.addAttribute("currentUser", user);
-        model.addAttribute("phone", user.getContacts().getPhoneNumber());
-        model.addAttribute("email", user.getContacts().getEmail());
-
         return "profile";
     }
 
@@ -55,18 +52,10 @@ public class UserController {
 
     @PostMapping(SAVE_PROFILE)
     public String saveProfile(Model model, @ModelAttribute("currentUser") User user, UserDto userDto) {
-        if(!userDto.getPassword().equals("")) {
+        if (!userDto.getPassword().equals("")) {
             userDto.setPassword(encoder.encode(userDto.getPassword()));
         }
-       /* model.addAttribute("currentUser", userService.register(
-                User.builder()
-                        .name(userDto.getName())
-                        .password(userDto.getPassword())
-                        .build()
-        ));*/
-
         model.addAttribute("currentUser", userService.updateUser(user, userDto));
-
         return "editProfile";
     }
 }
