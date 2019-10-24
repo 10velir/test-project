@@ -30,7 +30,6 @@ public class CarService {
         return carRepository.getById(id);
     }
 
-    @Cacheable("cars")
     public Page<Car> getAll(Integer page) {
         return carRepository.findAll(PageRequest.of(page, 9));
     }
@@ -56,7 +55,6 @@ public class CarService {
         }
     }
 
-    @Cacheable("cars")
     public List<Car> getAll() {
         return (List<Car>) carRepository.findAll();
     }
